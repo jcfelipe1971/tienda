@@ -1,0 +1,6 @@
+{
+  "name": "Tienda de Ropa y Calzado",
+  "description": "Sitio web completo de venta de ropa y zapatos con pedidos directos por WhatsApp, chat integrado para clientes y panel de administración para el dueño con soporte de asistente de IA (Gemini).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
