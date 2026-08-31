@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { MessageSquare, Eye, AlertTriangle, Tag, ImageIcon } from "lucide-react";
 import { Product, StoreSettings } from "../types";
-import { formatCategoryName, getProductCode, normalizeProductImages } from "../utils";
+import { formatCategoryName, getProductCode, getProductImages } from "../utils";
+
 
 interface ProductCardProps {
   product: Product;
@@ -16,7 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onViewDetails,
   onInstantBuy,
 }) => {
-  const images = normalizeProductImages(product.images);
+  const images = getProductImages(product);
   const [isHovered, setIsHovered] = useState(false);
   const isLowStock = product.stock > 0 && product.stock <= 5;
   const isOutOfStock = product.stock === 0;
