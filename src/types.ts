@@ -1,16 +1,15 @@
-// Ya NO hay tipos hardcodeados. Todo viene de la BD.
-export type StoreType = string; // "tienda", "mercado", "arte", etc.
+export type StoreType = "tienda" | "mercado";
 
 export interface Tipo {
   id: number;
   nombre: string;
-  descripcion: string;
-  categorias: Categoria[];
+  descripcion?: string;
 }
 
 export interface Categoria {
   id: number;
   nombre: string;
+  tipo_id?: number | null;
 }
 
 export interface Product {
@@ -18,16 +17,17 @@ export interface Product {
   code?: string;
   name: string;
   description: string;
-  category: string;
-  storeType: StoreType;
+  tipo_id: number;        // Nuevo: ID del tipo (Tienda/Mercado)
+  categoria_id: number;   // Nuevo: ID de la categoría
+  // Mantenemos estos por compatibilidad temporal, pero el sistema usará los IDs
+  category?: string;      
+  storeType?: StoreType;  
   price: number;
   images: string[];
   sizes: string[];
   colors: string[];
   stock: number;
   featured: boolean;
-  tipo_id: number;       // ID del tipo en la BD
-  categoria_id: number;  // ID de la categoría en la BD
 }
 
 export interface StoreSettings {
@@ -41,7 +41,7 @@ export interface StoreSettings {
 
 export interface ChatMessage {
   id: string;
-  sender: "customer" | "owner" | "ai";
+  sender: 'customer' | 'owner' | 'ai';
   text: string;
   timestamp: string;
 }
@@ -52,11 +52,20 @@ export interface ChatSession {
   createdAt: string;
   updatedAt: string;
   messages: ChatMessage[];
-  unread: boolean;
+  unread?: boolean;
 }
 
 export interface VisitsData {
   totalVisits: number;
   visitsToday: number;
-  visitsLog: any[];
+  visitsLog?: any[];
+}
+
+export interface DatabaseSchema {
+  settings: StoreSettings;
+  tipos: Tipo[];
+  categorias: Categoria[];
+  products: Product[];
+  chats: ChatSession[];
+  visits?: VisitsData;
 }

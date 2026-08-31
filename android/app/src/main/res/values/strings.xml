@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">AJEstilo</string>
-    <string name="title_activity_main">AJEstilo</string>
-    <string name="package_name">jksoft.neti.cu.app</string>
-    <string name="custom_url_scheme">jksoft.neti.cu.app</string>
-</resources>

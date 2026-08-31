@@ -12,7 +12,7 @@ import {
   ImageIcon
 } from "lucide-react";
 import { Product, StoreSettings } from "../types";
-import { formatCategoryName, getProductCode, getProductImages } from "../utils";
+import { formatCategoryName, getProductCode, normalizeProductImages } from "../utils";
 
 interface ProductDetailModalProps {
   product: Product;
@@ -25,7 +25,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   settings,
   onClose,
 }) => {
-  const images = getProductImages(product);
+  const images = normalizeProductImages(product.images);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || "");
   const [selectedColor, setSelectedColor] = useState<string>(product.colors[0] || "");

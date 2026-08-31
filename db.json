@@ -68,8 +68,8 @@
   ],
   "chats": [],
   "visits": {
-    "totalVisits": 2,
-    "visitsToday": 2,
+    "totalVisits": 4,
+    "visitsToday": 1,
     "visitsLog": [
       {
         "id": "v-1788048030368-bfhn",
@@ -82,6 +82,18 @@
         "timestamp": "2026-08-30T00:03:40.964Z",
         "ip": "127.0.0.1",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0"
+      },
+      {
+        "id": "v-1788114907400-3f3t",
+        "timestamp": "2026-08-30T18:35:07.400Z",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0"
+      },
+      {
+        "id": "v-1788201638141-umnx",
+        "timestamp": "2026-08-31T18:40:38.141Z",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0"
       }
     ]
   }
