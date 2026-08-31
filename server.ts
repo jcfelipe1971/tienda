@@ -304,11 +304,9 @@ async function startServer() {
         [id],
       );
       if (productos[0].count > 0)
-        return res
-          .status(400)
-          .json({
-            error: `No se puede eliminar: hay ${productos[0].count} producto(s) de este tipo.`,
-          });
+        return res.status(400).json({
+          error: `No se puede eliminar: hay ${productos[0].count} producto(s) de este tipo.`,
+        });
 
       await pool.query("DELETE FROM categorias WHERE tipo_id = ?", [id]);
       await pool.query("DELETE FROM tipos WHERE id = ?", [id]);
@@ -373,11 +371,9 @@ async function startServer() {
         [id],
       );
       if (productos[0].count > 0)
-        return res
-          .status(400)
-          .json({
-            error: `No se puede eliminar: hay ${productos[0].count} producto(s) usando esta categoría.`,
-          });
+        return res.status(400).json({
+          error: `No se puede eliminar: hay ${productos[0].count} producto(s) usando esta categoría.`,
+        });
 
       await pool.query("DELETE FROM categorias WHERE id = ?", [id]);
       const [rows]: any = await pool.query(
@@ -603,6 +599,49 @@ async function startServer() {
       res.sendFile(path.join(distPath, "index.html")),
     );
   }
+  // Endpoint para editar tipo
+  app.put("/api/tipos/:id", async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+      const { nombre, descripcion } = req.body || {};
+      if (!nombre || !nombre.trim())
+        return res
+          .status(400)
+          .json({ error: "El nombre del tipo es obligatorio" });
+      await pool.query(
+        "UPDATE tipos SET nombre = ?, descripcion = ? WHERE id = ?",
+        [nombre.trim(), descripcion?.trim() || "", id],
+      );
+      const [rows]: any = await pool.query(
+        "SELECT id, nombre, descripcion FROM tipos ORDER BY id ASC",
+      );
+      res.json({ success: true, tipos: rows });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  // Endpoint para editar categoría
+  app.put("/api/categorias/:id", async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+      const { nombre, tipo_id } = req.body || {};
+      if (!nombre || !nombre.trim())
+        return res
+          .status(400)
+          .json({ error: "El nombre de la categoría es obligatorio" });
+      await pool.query(
+        "UPDATE categorias SET nombre = ?, tipo_id = ? WHERE id = ?",
+        [nombre.trim(), tipo_id ? Number(tipo_id) : null, id],
+      );
+      const [rows]: any = await pool.query(
+        "SELECT id, nombre, tipo_id FROM categorias ORDER BY id ASC",
+      );
+      res.json({ success: true, categorias: rows });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
 
   app.listen(PORT, "0.0.0.0", () =>
     console.log(
